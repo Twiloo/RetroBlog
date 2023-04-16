@@ -5,8 +5,6 @@ namespace Routes;
 include_once 'routesAPI.php';
 
 set_exception_handler(function ($e) {
-  $message = $e->getMessage();
-  $code = $e->getCode();
   include_once 'views/error.php';
 });
 

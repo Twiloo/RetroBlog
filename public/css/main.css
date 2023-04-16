@@ -4,7 +4,7 @@
     box-sizing: border-box;
 	font-family: 'Tahoma', sans-serif;
 	scroll-behavior: smooth;
-	outline: red solid 1px;
+	/* outline: red solid 1px; */
 }
 
 html {

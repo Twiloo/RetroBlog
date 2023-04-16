@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" href="/favicon.ico">
-    <title>Erreur <?php echo $code ?></title>
+    <title>Erreur <?php echo $e->getCode() ?></title>
 </head>
 <body>
-    <h1>Erreur <?php echo $code ?></h1>
-    <p><?php echo $message ?></p>
+    <h1>Erreur <?php echo $e->getCode(); ?></h1>
+    <p><?php echo $e->getMessage(); ?></p>
 </body>
 </html>

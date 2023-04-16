@@ -5,11 +5,8 @@ namespace RoutesAPI;
 include_once 'src/FrameworkBundle/entities/exceptionEntity.php';
 
 set_exception_handler(function ($e) {
-  $message = $e->getMessage();
-  $code = $e->getCode();
-  $path = $e->getPath();
   header("Content-Type: application/json");
-  echo json_encode(array("code" => $code, "message" => $message, "path" => $path));
+  echo json_encode(array("code" => $e->getCode(), "message" => $e->getMessage(), "path" => $e->getPath()));
 });
 
 require_once 'app/config.php';
@@ -61,21 +58,21 @@ get('/test', 'Controllers/testController');
 
 // Don't look at this code, it's ugly and it's not optimized at all but it works and I don't care I guess :D
 \Framework\Router::any('/api/$path/$path2/$path3/$path4/$path5', function ($path, $path2, $path3, $path4, $path5) {
-  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible", 404, "$path/$path2/$path3/$path4/$path5");
+  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible.", 404, "$path/$path2/$path3/$path4/$path5");
 });
 
 \Framework\Router::any('/api/$path/$path2/$path3/$path4', function ($path, $path2, $path3, $path4) {
-  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible", 404, "$path/$path2/$path3/$path4");
+  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible.", 404, "$path/$path2/$path3/$path4");
 });
 
 \Framework\Router::any('/api/$path/$path2/$path3', function ($path, $path2, $path3) {
-  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible", 404, "$path/$path2/$path3");
+  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible.", 404, "$path/$path2/$path3");
 });
 
 \Framework\Router::any('/api/$path/$path2', function ($path, $path2) {
-  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible", 404, "$path/$path2");
+  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible.", 404, "$path/$path2");
 });
 
 \Framework\Router::any('/api/$path', function ($path) {
-  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible", 404, $path);
+  throw new \Framework\entities\exceptionEntity("La requête demandée n'a pas été trouvée ou n'est pas disponible.", 404, $path);
 });
