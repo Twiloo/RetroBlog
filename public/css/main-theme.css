@@ -84,6 +84,10 @@ section {
     backdrop-filter: blur(15px) brightness(0.1);
 }
 
+section article {
+    background: transparent;
+}
+
 section h1 {
     border-bottom: solid var(--separator-color);
     font-family: Brush Script MT, "BrushScript", Brush Script Std, cursive;
@@ -112,4 +116,34 @@ section a {
 section a:hover {
     color: var(--link-hover-color);
     text-decoration: underline;
+}
+
+section hr {
+    border-bottom-color: var(--border-color);
+    background: transparent;
+}
+
+section form, section form input, section form textarea, section form label, section form span {
+    background: transparent;
+    color: var(--text-color);
+}
+
+section form input[type="submit"] {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+section form input[type="file"] {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+section ul, section ol {
+    color: var(--text-color);
+    background: transparent;
+}
+
+section ul li, section ol li {
+    color: var(--text-color);
+    background: transparent;
 }

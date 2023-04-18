@@ -15,6 +15,6 @@
         ?>
     </nav>
     <nav id="header-menu">
-        <a href="#">Compte</a>
+        <a href="<?php echo HOME_URL; ?>/article/new">Poster</a>
     </nav>
 </header>

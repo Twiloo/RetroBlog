@@ -76,4 +76,12 @@ get('/articles/recent', function () {
   \AppBundle\controllers\articleController::articleListAction('recent');
 });
 
+get('/article/new', function () {
+  \AppBundle\controllers\articleController::articleFormAction();
+});
+
+post('/article/post', function () {
+  \AppBundle\controllers\articleController::articlePostAction();
+});
+
 any('/404', 'views/404.php');

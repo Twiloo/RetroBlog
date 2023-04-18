@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiBundle\Traits;
+namespace FrameworkBundle\Traits;
 
 class databaseTrait extends \PDO {
 
@@ -16,5 +16,4 @@ class databaseTrait extends \PDO {
         }
         return self::$instance;
     }
-
 }
