@@ -34,6 +34,7 @@ header {
 #header-title {
     background-color: inherit;
     border-right-color: var(--border-color);
+    border-right-style: solid;
 }
 
 #header-title h1 {
@@ -56,6 +57,7 @@ header {
 #header-menu {
     background-color: inherit;
     border-left-color: var(--border-color);
+    border-left-style: solid;
 }
 
 .header-link {

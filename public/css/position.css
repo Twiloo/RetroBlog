@@ -6,6 +6,10 @@
 
 * {
     border-width: 0px;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --main-separator-border: 0.1vw;
+    --secondary-separator-border: 0.2vw;
 }
 
 .body {
@@ -22,7 +26,7 @@ header {
     top: 0;
     z-index: 1;
     width: 100%;
-    height: 150px;
+    height: 10vw;
     padding: 0;
     margin: 0;
     align-items: center;
@@ -31,39 +35,39 @@ header {
 
 #header-logo {
     display: flex;
-    height: 100px;
-    width: 150px;
-    margin-left: 5px;
-    padding: 5px;
+    height: 8vw;
+    width: 8vw;
+    margin-left: 0.4vw;
+    padding: 0.4vw;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
 #header-logo img {
-    height: 100px;
+    height: 7vw;
     width: auto;
     background-color: inherit;
     border-radius: 50%;
-    border-width: 2px;
+    border-width: var(--secondary-separator-border);
 }
 
 #header-title {
     display: flex;
-    height: 100px;
-    width: 200px;
-    margin-right: 5px;
-    padding: 5px;
+    height: 8vw;
+    width: 12vw;
+    margin-right: 0.4vw;
+    padding: 0.4vw;
     align-items: end;
     justify-content: center;
-    border-right: 1px solid;
+    border-right: var(--main-separator-border);
 }
 
 #header-title h1 {
-    margin-right: 20px;
-    font-size: 3em;
+    margin-right: 0.6vw;
+    font-size: 3.4vw;
     font-weight: 300;
-    transform: scaleY(1.4) rotate(-5deg) skewX(-5deg) translateY(-15px); 
+    transform: scaleY(1.4) rotate(-5deg) skewX(-5deg) translateY(-1.4vw); 
 }
 
 #header-main {
@@ -75,12 +79,12 @@ header {
 }
 
 .header-link {
-    margin: 10px;
+    margin: 0.4vw;
     text-align: center;
-    width: 180px;
-    height: 80px;
-    border-radius: 20px;
-    font-size: 1.4em;
+    width: 10vw;
+    height: 6vw;
+    border-radius: 1vw;
+    font-size: 1.2vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,34 +97,34 @@ header {
 
 .header-separator {
     display: inline-flex;
-    width: 8px;
-    height: 8px;
+    width: 0.6vw;
+    height: 0.6vw;
     align-items: center;
     justify-content: space-around;
-    border-width: 2px;
+    border-width: var(--secondary-separator-border);
     border-radius: 50%;
 }
 
 #header-menu {
     display: flex;
-    width: 150px;
-    height: 100px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 5px;
+    width: 10vw;
+    height: 8vw;
+    margin-left: 0.4vw;
+    margin-right: 0.4vw;
+    padding: 0.4vw;
     align-items: center;
     justify-content: space-around;
-    border-left: 1px solid;
+    border-left: var(--main-separator-border);
 }
 
 main {
     position: relative;
-    top: 150px;
+    top: 10vw;
     box-shadow: inset 0 0 5em 1em #000;
     display: flexbox;
     width: 100%;
     height: 100%;
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 10vw);
     padding: 10px;
     align-items: center;
     justify-content: center;
@@ -131,7 +135,7 @@ section {
     height: 100%;
     margin: 20px;
     padding: 20px;
-    border-width: 1px;
+    border-width: var(--main-separator-border);
     border-radius: 10px;
     align-items: center;
     justify-content: center;
@@ -142,7 +146,7 @@ section h1 {
     margin: 10px;
     padding: 10px;
     text-align: center;
-    border-bottom: 2px;
+    border-bottom: var(--secondary-separator-border);
     font-size: 4em;
     font-weight: 300;
 }
@@ -152,7 +156,7 @@ section h2 {
     margin: 10px;
     padding: 10px;
     text-align: center;
-    border-bottom: 2px;
+    border-bottom: var(--secondary-separator-border);
     font-size: 3em;
     font-weight: 300;
     text-align: center;
