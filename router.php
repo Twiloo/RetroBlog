@@ -23,6 +23,7 @@ if (!file_exists(SITE_NAME . ".log")) {
   $logfile = fopen(SITE_NAME . ".log", "w");
   fwrite($logfile, 0);
   fclose($logfile);
+  include_once 'bddInit.php';
 }
 
 $logfile = fopen(SITE_NAME . ".log", "r");
