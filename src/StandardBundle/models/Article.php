@@ -1,9 +1,12 @@
 <?php
 
-namespace AppBundle\models;
+namespace StandardBundle\models;
 
-include_once 'src/AppBundle/models/ImageFormat.php';
+include_once 'src/StandardBundle/models/ImageFormat.php';
 include_once 'src/FrameworkBundle/Traits/databaseTrait.php';
+
+use StandardBundle\models\ImageFormat as ImageFormat;
+use FrameworkBundle\Traits\databaseTrait as databaseTrait;
 
 class Article {
 
@@ -25,18 +28,18 @@ class Article {
     }
 
     private function save() : void {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = Article::$table;
         $db->query("INSERT INTO $table (title, content, imageformat) VALUES ('$this->title', '$this->content', '$this->imageformat')");
         $this->id = $db->lastInsertId();
     }
 
     public static function getArticleById($id) : Article {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = Article::$table;
         $result = $db->query("SELECT * FROM $table WHERE id = $id LIMIT 1");
         $article = $result->fetch();
-        $article = new Article($article['title'], $article['content'], \AppBundle\models\ImageFormat::getImageFormatById($article['imageformat']), $article['id']);
+        $article = new Article($article['title'], $article['content'], ImageFormat::getImageFormatById($article['imageformat']), $article['id']);
         return $article;
     }
 }

@@ -2,7 +2,9 @@
 
 namespace FrameworkBundle\Traits;
 
-class databaseTrait extends \PDO {
+use PDO;
+
+class databaseTrait extends PDO {
 
     private static $instance = null;
 

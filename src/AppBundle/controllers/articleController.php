@@ -2,7 +2,10 @@
 
 namespace AppBundle\controllers;
 
-include_once 'src/AppBundle/models/Article.php';
+include_once 'src/StandardBundle/models/Article.php';
+
+use StandardBundle\models\Article as Article;
+use StandardBundle\models\ImageFormat as ImageFormat;
 
 class articleController {
 
@@ -59,9 +62,9 @@ class articleController {
             $title = $_POST['article-title'];
             $content = $_POST['article-content'];
             $imageformat = explode('.', $_FILES['article-image']['name'])[count(explode('.', $_FILES['article-image']['name']))-1];
-            $imageformat = \AppBundle\models\ImageFormat::getImageFormatByFormat($imageformat);
+            $imageformat = ImageFormat::getImageFormatByFormat($imageformat);
             if ($imageformat == null) {
-                $imageformats = \AppBundle\models\ImageFormat::getImageFormats();
+                $imageformats = ImageFormat::getImageFormats();
                 $_SESSION['error'] = "Le format de l'image n'est pas valide. Les formats acceptés sont: ";
                 foreach ($imageformats as $imageformat) {
                     $_SESSION['error'] .= '".'. $imageformat->getFormat() . '", ';
@@ -88,7 +91,7 @@ class articleController {
                 header('Location: /article/new');
             }
 
-            $article = new \AppBundle\models\Article($title, $content, $imageformat);
+            $article = new Article($title, $content, $imageformat);
 
             header('Location: /articles');
         }

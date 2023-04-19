@@ -1,8 +1,10 @@
 <?php
 
-namespace AppBundle\models;
+namespace StandardBundle\models;
 
 include_once 'src/FrameworkBundle/Traits/databaseTrait.php';
+
+use FrameworkBundle\Traits\databaseTrait as databaseTrait;
 
 class ImageFormat {
 
@@ -19,14 +21,14 @@ class ImageFormat {
     }
 
     private function save() : void {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = ImageFormat::$table;
         $db->query("INSERT INTO $table (format) VALUES ('$this->format')");
         $this->id = $db->lastInsertId();
     }
 
     public static function getImageFormatById(int $id) : ImageFormat {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = ImageFormat::$table;
         $result = $db->query("SELECT * FROM $table WHERE id = $id LIMIT 1");
         $imageformat = $result->fetch();
@@ -35,7 +37,7 @@ class ImageFormat {
     }
 
     public static function getImageFormatByFormat(string $format) : ImageFormat|null {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = ImageFormat::$table;
         $result = $db->query("SELECT * FROM $table WHERE format = '$format' LIMIT 1");
         $imageformat = $result->fetch();
@@ -47,7 +49,7 @@ class ImageFormat {
     }
 
     public static function getImageFormats() : array {
-        $db = \FrameworkBundle\Traits\databaseTrait::getDb();
+        $db = databaseTrait::getDb();
         $table = ImageFormat::$table;
         $result = $db->query('SELECT * FROM $table');
         $imageformats = $result->fetchAll();
