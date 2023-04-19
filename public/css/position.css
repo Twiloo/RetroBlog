@@ -217,7 +217,7 @@ section form input {
     border-width: var(--secondary-separator-border);
     border-radius: 10px;
     font-size: 1.2em;
-    text-align: center;
+    text-align: left;
 }
 
 section form textarea {
@@ -228,6 +228,10 @@ section form textarea {
     border-width: var(--secondary-separator-border);
     border-radius: 10px;
     font-size: 1.2em;
+    text-align: left;
+}
+
+section form input[type="file"] {
     text-align: center;
 }
 

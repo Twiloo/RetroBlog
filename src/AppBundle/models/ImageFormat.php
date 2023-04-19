@@ -2,10 +2,13 @@
 
 namespace AppBundle\models;
 
+include_once 'src/FrameworkBundle/Traits/databaseTrait.php';
+
 class ImageFormat {
 
     private $id = null;
     private $format;
+    private static $table = 'imageformats';
 
     public function __construct(string $format, int|null $id = null) {
         $this->id = $id;
@@ -17,13 +20,15 @@ class ImageFormat {
 
     private function save() : void {
         $db = \FrameworkBundle\Traits\databaseTrait::getDb();
-        $db->query("INSERT INTO imageformats (format) VALUES ('$this->format')");
+        $table = ImageFormat::$table;
+        $db->query("INSERT INTO $table (format) VALUES ('$this->format')");
         $this->id = $db->lastInsertId();
     }
 
     public static function getImageFormatById(int $id) : ImageFormat {
         $db = \FrameworkBundle\Traits\databaseTrait::getDb();
-        $result = $db->query("SELECT * FROM imageformats WHERE id = $id LIMIT 1");
+        $table = ImageFormat::$table;
+        $result = $db->query("SELECT * FROM $table WHERE id = $id LIMIT 1");
         $imageformat = $result->fetch();
         $imageformat = new ImageFormat($imageformat['format'], $imageformat['id']);
         return $imageformat;
@@ -31,7 +36,8 @@ class ImageFormat {
 
     public static function getImageFormatByFormat(string $format) : ImageFormat|null {
         $db = \FrameworkBundle\Traits\databaseTrait::getDb();
-        $result = $db->query("SELECT * FROM imageformats WHERE format = '$format' LIMIT 1");
+        $table = ImageFormat::$table;
+        $result = $db->query("SELECT * FROM $table WHERE format = '$format' LIMIT 1");
         $imageformat = $result->fetch();
         if ($imageformat == null) {
             return null;
@@ -42,7 +48,8 @@ class ImageFormat {
 
     public static function getImageFormats() : array {
         $db = \FrameworkBundle\Traits\databaseTrait::getDb();
-        $result = $db->query('SELECT * FROM imageformats');
+        $table = ImageFormat::$table;
+        $result = $db->query('SELECT * FROM $table');
         $imageformats = $result->fetchAll();
         $imageformats = array_map(function($imageformat) {
             return new ImageFormat($imageformat['format'], $imageformat['id']);

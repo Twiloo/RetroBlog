@@ -53,14 +53,6 @@
     </main>
 
     <?php renderComponent('/postLoader.html', $data); ?>
-    <?php 
-    if (isset($data['error'])) {
-        ?>
-        <script>
-            alert("<?php echo $data['error']; ?>");
-        </script>
-    <?php 
-    } 
-    ?>
+    <?php renderComponent('/errorHandler.php', $data['error']); ?>
 </body>
 </html>

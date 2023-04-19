@@ -23,6 +23,8 @@ define('DB_NAME', getenv('DB_NAME'));
 define('DB_PASSWORD' ,getenv('DB_PASSWORD'));
 define('DB_PORT', getenv('DB_PORT'));
 define('DB_USER', getenv('DB_USER'));
+define('DB_TYPE', getenv('DB_TYPE'));
+define('DB_CHARSET', getenv('DB_CHARSET'));
 
 // Informations about HTML definition
 

@@ -45,18 +45,20 @@ class articleController {
             )
         );
 
+        unset($_SESSION['error']);
+
         render('/articleform.view.php', $data);
     }
 
     public static function articlePostAction() {
 
         if (!isset($_POST['article-title']) || !isset($_POST['article-content']) || !isset($_FILES['article-image']) || $_FILES['article-image']['error'] !== 0) {
-            $_SESSION['error'] = "Le formulaire n'a pas été rempli correctement";
+            $_SESSION['error'] = "Un champs du formulaire n'a pas été rempli.";
             header('Location: /article/new');
         } else {
             $title = $_POST['article-title'];
             $content = $_POST['article-content'];
-            $imageformat = explode('.', $_FILES['article-image']['name'])[count(explode('.', $_FILES['article-image']['name']))];
+            $imageformat = explode('.', $_FILES['article-image']['name'])[count(explode('.', $_FILES['article-image']['name']))-1];
             $imageformat = \AppBundle\models\ImageFormat::getImageFormatByFormat($imageformat);
             if ($imageformat == null) {
                 $imageformats = \AppBundle\models\ImageFormat::getImageFormats();
