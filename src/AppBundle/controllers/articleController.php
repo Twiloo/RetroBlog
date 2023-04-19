@@ -2,6 +2,8 @@
 
 namespace AppBundle\controllers;
 
+include_once 'src/AppBundle/models/Article.php';
+
 class articleController {
 
     public static function articleListAction(string $order = '') : void {
@@ -33,6 +35,7 @@ class articleController {
 
         $data = array(
             'title' => 'Nouvel article',
+            'error' => $_SESSION['error'] ?? null,
             'linkedPages' => array(
                 'Articles' => '/articles',
                 'Top Articles' => '/articles/top',
@@ -48,14 +51,40 @@ class articleController {
     public static function articlePostAction() {
 
         if (!isset($_POST['article-title']) || !isset($_POST['article-content']) || !isset($_FILES['article-image']) || $_FILES['article-image']['error'] !== 0) {
-            $_SESSION['error'] = "Le formulaire n'a pas été rempli correctement.";
+            $_SESSION['error'] = "Le formulaire n'a pas été rempli correctement";
             header('Location: /article/new');
         } else {
             $title = $_POST['article-title'];
             $content = $_POST['article-content'];
             $imageformat = explode('.', $_FILES['article-image']['name'])[count(explode('.', $_FILES['article-image']['name']))];
-            $imageformat = \AppBundle\models\ImageFormat::getImageFormatById($imageformat);
-            
+            $imageformat = \AppBundle\models\ImageFormat::getImageFormatByFormat($imageformat);
+            if ($imageformat == null) {
+                $imageformats = \AppBundle\models\ImageFormat::getImageFormats();
+                $_SESSION['error'] = "Le format de l'image n'est pas valide. Les formats acceptés sont: ";
+                foreach ($imageformats as $imageformat) {
+                    $_SESSION['error'] .= '".'. $imageformat->getFormat() . '", ';
+                }
+                $_SESSION['error'] = substr($_SESSION['error'], 0, -2);
+                $_SESSION['error'] .= '.';
+            }
+            if ($_FILES['article-image']['size'] > 2000000) {
+                $_SESSION['error'] = "L'image est trop lourde. Elle ne doit pas dépasser 2Mo.";
+            }
+            if (strlen($title) < 5) {
+                $_SESSION['error'] = "Le titre est trop court. Ce dernier doit faire au moins 5 caractères.";
+            }
+            if (strlen($content) < 10) {
+                $_SESSION['error'] = "Le contenu est trop court. Ce dernier doit faire au moins 10 caractères.";
+            }
+            if (strlen($title) > 255) {
+                $_SESSION['error'] = "Le titre est trop long. Ce dernier ne doit pas dépasser 255 caractères.";
+            }
+            if (strlen($content) > 65535) {
+                $_SESSION['error'] = "Le contenu est trop long. Ce dernier ne doit pas dépasser 65535 caractères.";
+            }
+            if (isset($_SESSION['error'])) {
+                header('Location: /article/new');
+            }
 
             $article = new \AppBundle\models\Article($title, $content, $imageformat);
 

@@ -1,8 +1,8 @@
 <?php
 
-include_once 'src/AppBundle/models/ImageFormat.php';
-
 namespace AppBundle\models;
+
+include_once 'src/AppBundle/models/ImageFormat.php';
 
 class Article {
 
