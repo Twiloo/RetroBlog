@@ -1,0 +1,34 @@
+* {
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    background: transparent;
+    text-align: center;
+    width: 100%;
+    /* outline: red solid 1px; */
+}
+
+html {
+    display: block;
+}
+
+h1 {
+    display: block;
+    position: fixed;
+    top: 30%;
+    font-size: 4em;
+}
+
+p {
+    display: block;
+    position: fixed;
+    top: 50%;
+    font-size: 2em;
+}
+
+a {
+    display: block;
+    position: fixed;
+    top: 70%;
+    font-size: 2em;
+}

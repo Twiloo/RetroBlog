@@ -15,7 +15,8 @@ try {
     
     $bdd->query("CREATE TABLE IF NOT EXISTS `imageformats` (
         `id` tinyint(3) NOT NULL AUTO_INCREMENT,
-        `format` varchar(255) NOT NULL,
+        `receivedformat` varchar(255) NOT NULL,
+        `localformat` varchar(255) NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=". DB_CHARSET .";");
 
@@ -37,10 +38,10 @@ try {
     $result = $result->fetchAll();
 
     if (count($result) == 0) {
-        $bdd->query("INSERT INTO `imageformats` (`format`) VALUES
-        ('jpg'),
-        ('png'),
-        ('jpeg');");
+        $bdd->query("INSERT INTO `imageformats` (`receivedformat`, `localformat`) VALUES
+        ('jpg', 'jpeg'),
+        ('png', 'png'),
+        ('jpeg', 'jpeg');");
     }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());

@@ -30,7 +30,8 @@ class Article {
     private function save() : void {
         $db = databaseTrait::getDb();
         $table = Article::$table;
-        $db->query("INSERT INTO $table (title, content, imageformat) VALUES ('$this->title', '$this->content', '$this->imageformat')");
+        $idimageformat = $this->imageformat->getId();
+        $db->query("INSERT INTO $table (title, content, imageformat) VALUES ('$this->title', '$this->content', '$idimageformat')");
         $this->id = $db->lastInsertId();
     }
 
@@ -41,5 +42,9 @@ class Article {
         $article = $result->fetch();
         $article = new Article($article['title'], $article['content'], ImageFormat::getImageFormatById($article['imageformat']), $article['id']);
         return $article;
+    }
+
+    public function getId() : int {
+        return $this->id;
     }
 }

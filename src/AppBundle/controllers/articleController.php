@@ -62,19 +62,25 @@ class articleController {
             $title = $_POST['article-title'];
             $content = $_POST['article-content'];
             $imageformat = explode('.', $_FILES['article-image']['name'])[count(explode('.', $_FILES['article-image']['name']))-1];
-            $imageformat = ImageFormat::getImageFormatByFormat($imageformat);
+            $imageformat = ImageFormat::getImageFormatByReceivedFormat($imageformat);
+            
+            // Vérification format d'image
             if ($imageformat == null) {
                 $imageformats = ImageFormat::getImageFormats();
                 $_SESSION['error'] = "Le format de l'image n'est pas valide. Les formats acceptés sont: ";
                 foreach ($imageformats as $imageformat) {
-                    $_SESSION['error'] .= '".'. $imageformat->getFormat() . '", ';
+                    $_SESSION['error'] .= '".'. $imageformat->getReceivedFormat() . '", ';
                 }
                 $_SESSION['error'] = substr($_SESSION['error'], 0, -2);
                 $_SESSION['error'] .= '.';
             }
+
+            // Vérification taille image
             if ($_FILES['article-image']['size'] > 2000000) {
                 $_SESSION['error'] = "L'image est trop lourde. Elle ne doit pas dépasser 2Mo.";
             }
+
+            // Vérification taille titre et contenu
             if (strlen($title) < 5) {
                 $_SESSION['error'] = "Le titre est trop court. Ce dernier doit faire au moins 5 caractères.";
             }
@@ -87,11 +93,27 @@ class articleController {
             if (strlen($content) > 65535) {
                 $_SESSION['error'] = "Le contenu est trop long. Ce dernier ne doit pas dépasser 65535 caractères.";
             }
+
+            // Arrêt du script si erreur
             if (isset($_SESSION['error'])) {
                 header('Location: /article/new');
+                exit();
             }
 
             $article = new Article($title, $content, $imageformat);
+
+            // Création de l'image redimensionnée et enregistrement dans le dossier public/img/articles
+            $image = imagecreatefromstring(file_get_contents($_FILES['article-image']['tmp_name']));
+            $width = imagesx($image);
+            $height = imagesy($image);
+            $newwidth = 450;
+            $newheight = floor($height * ($newwidth / $width));
+            $tmpimage = imagecreatetruecolor($newwidth, $newheight);
+            imagecopyresampled($tmpimage, $image, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+            // Enregistrement de l'image en fonction du format de stockage local
+            $imagestore = 'image'. $imageformat->getLocalFormat();
+            $imagestore($tmpimage, 'public/img/articles/'. $article->getId() .'.'. $imageformat->getLocalFormat());
 
             header('Location: /articles');
         }
