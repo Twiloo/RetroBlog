@@ -57,17 +57,6 @@ class ImageFormat {
         return $imageformat;
     }
 
-    public static function isReceivedFormatValid(string $receivedformat) : bool {
-        $db = databaseTrait::getDb();
-        $table = ImageFormat::$table;
-        $result = $db->query("SELECT * FROM $table WHERE receivedformat = '$receivedformat' LIMIT 1");
-        $imageformat = $result->fetch();
-        if ($imageformat == null) {
-            return false;
-        }
-        return true;
-    }
-
     public static function getImageFormats() : array {
         $db = databaseTrait::getDb();
         $table = ImageFormat::$table;

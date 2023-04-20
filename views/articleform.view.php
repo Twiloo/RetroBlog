@@ -26,7 +26,14 @@
                 </span>
                 <span>
                     <label></label>
-                    <p>Veillez à avoir un format png/jpg pour la photo ainsi qu'une taille inférieure à 2 Mo.</p>
+                    <p>Veillez à avoir un format 
+                        <?php 
+                        $availableformats = null;
+                        foreach($data['availableformats'] as $imageformat) 
+                            $availableformats .= $imageformat->getReceivedFormat() . ', ';
+                        echo substr($availableformats, 0, -2);
+                        ?>
+                    pour la photo ainsi qu'une taille inférieure à 2 Mo.</p>
                 </span>
                 <hr>
                 <span>

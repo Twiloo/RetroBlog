@@ -8,7 +8,7 @@
         <section>
         <?php
             echo '<h1>' . $data['title'] . '</h1>';
-            echo '<img id="article-image" src="/img/articles/'. $data['article']->getId() .'.'. $data['article']->getImageFormat()->getLocalFormat() .'" alt="Image de l\'article '. $data['article']->getTitle() .'">';
+            echo '<img class="article-image" src="/img/articles/'. $data['article']->getId() .'.'. $data['article']->getImageFormat()->getLocalFormat() .'" alt="Image de l\'article '. $data['article']->getTitle() .'">';
             echo '<p>';
             out($data['article']->getContent());
             echo '</p>';

@@ -59,7 +59,8 @@ class articleController {
                 'Articles' => '/articles',
                 'Top Articles' => '/articles/top',
                 'Articles Récents' => '/articles/recent'
-            )
+            ),
+            'availableformats' => ImageFormat::getImageFormats()
         );
 
         unset($_SESSION['error']);
@@ -129,7 +130,7 @@ class articleController {
             $imagestore = 'image'. $imageformat->getLocalFormat();
             $imagestore($tmpimage, 'public/img/articles/'. $article->getId() .'.'. $imageformat->getLocalFormat());
 
-            header('Location: /articles');
+            header('Location: /article/'. $article->getId());
         }
     }
 

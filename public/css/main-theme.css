@@ -4,7 +4,7 @@
 
     --separator-color: #949494;
     --border-color: #373737;
-    --button-hover-color: #292929;
+    --button-hover-color: #313131;
 
     --text-color: #fafafa;
     --link-color: #8af9d4;
@@ -71,6 +71,18 @@ header {
     background-color: var(--button-hover-color);
 }
 
+#header-poster {
+    color: var(--link-color);
+    text-decoration: none;
+    background-color: inherit;
+    transition: color 0.5s ease-in-out;
+}
+
+#header-poster:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
 main {
     background: url("/img/loader.jpg") var(--main-color);
     background-position: center;
@@ -132,6 +144,11 @@ section form, section form input, section form textarea, section form label, sec
 section form input[type="submit"] {
     background-color: var(--secondary-color);
     color: var(--text-color);
+    transition: all 0.2s ease-in-out;
+}
+
+section form input[type="submit"]:hover {
+    background-color: var(--button-hover-color);
 }
 
 section form input[type="file"] {

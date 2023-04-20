@@ -118,6 +118,12 @@ header {
     border-left: var(--main-separator-border);
 }
 
+#header-poster {
+    font-size: 2vw;
+    font-weight: 300;
+    text-align: center;
+}
+
 main {
     position: relative;
     top: 10vw;
@@ -302,7 +308,7 @@ section ul li, section ol li {
     backdrop-filter: blur(5px) brightness(0.2);
 }
 
-#article-image {
+.article-image {
     display: block;
     width: 450px;
     margin: auto;
