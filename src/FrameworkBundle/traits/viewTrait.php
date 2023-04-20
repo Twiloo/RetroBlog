@@ -7,3 +7,8 @@ function render(string $path, $data = []) : void {
 function renderComponent(string $path, $data = []) : void {
     render('/Components' . $path, $data);
 }
+
+function out(string $text) : void {
+    echo htmlspecialchars($text);
+  }
+  

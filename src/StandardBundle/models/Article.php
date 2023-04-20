@@ -31,7 +31,7 @@ class Article {
         $db = databaseTrait::getDb();
         $table = Article::$table;
         $idimageformat = $this->imageformat->getId();
-        $db->query("INSERT INTO $table (title, content, imageformat) VALUES ('$this->title', '$this->content', '$idimageformat')");
+        $db->prepare("INSERT INTO $table (title, content, imageformat) VALUES (:title, :content, :imageformat)")->execute(array('title' => $this->title, 'content' => $this->content, 'imageformat' => $idimageformat));
         $this->id = $db->lastInsertId();
     }
 
@@ -44,7 +44,41 @@ class Article {
         return $article;
     }
 
+    public static function getTopArticles(int|null $number = null) : array {
+        $db = databaseTrait::getDb();
+        $table = Article::$table;
+        $result = $db->query("SELECT * FROM $table ORDER BY likes DESC". ($number != null ? " LIMIT $number" : ""));
+        $articles = $result->fetchAll();
+        $articles = array_map(function($article) {
+            return new Article($article['title'], $article['content'], ImageFormat::getImageFormatById($article['imageformat']), $article['id']);
+        }, $articles);
+        return $articles;
+    }
+
+    public static function getRecentArticles(int|null $number = null) : array {
+        $db = databaseTrait::getDb();
+        $table = Article::$table;
+        $result = $db->query("SELECT * FROM $table ORDER BY date DESC". ($number != null ? " LIMIT $number" : ""));
+        $articles = $result->fetchAll();
+        $articles = array_map(function($article) {
+            return new Article($article['title'], $article['content'], ImageFormat::getImageFormatById($article['imageformat']), $article['id']);
+        }, $articles);
+        return $articles;
+    }
+
     public function getId() : int {
         return $this->id;
+    }
+
+    public function getTitle() : string {
+        return $this->title;
+    }
+
+    public function getContent() : string {
+        return $this->content;
+    }
+
+    public function getImageFormat() : ImageFormat {
+        return $this->imageformat;
     }
 }

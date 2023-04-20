@@ -100,6 +100,7 @@ section h2 {
     font-family: Brush Script MT, "BrushScript", Brush Script Std, cursive;
     color: var(--text-color);
     background: transparent;
+    text-shadow: 0 0 5px #000;
 }
 
 section p {
@@ -145,5 +146,27 @@ section ul, section ol {
 
 section ul li, section ol li {
     color: var(--text-color);
+    background: transparent;
+}
+
+.article-list {
+    background: transparent;
+}
+
+.article-list-item {
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    border-color: var(--border-color);
+    border-style: solid;
+}
+
+.article-list-item:hover {
+    color: var(--link-hover-color);
+}
+
+
+.article-list-item h2, .article-list-item h3 {
+    color: inherit;
+    font-family: inherit;
     background: transparent;
 }

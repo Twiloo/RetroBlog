@@ -6,3 +6,6 @@
 
 # ignore the .log file
 *.log
+
+#ignore the articles images folder content
+public/img/articles/*

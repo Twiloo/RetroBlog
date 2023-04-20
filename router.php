@@ -128,9 +128,3 @@ class Router {
     exit();
   }
 }
-
-// This function is used to escape HTML special characters (use this instead of echo when you want to display user input)
-
-function out(string $text) : void {
-  echo htmlspecialchars($text);
-}

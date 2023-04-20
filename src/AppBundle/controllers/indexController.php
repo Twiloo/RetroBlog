@@ -9,9 +9,7 @@ class indexController {
         $linkedPages = [
             'Articles' => '/articles',
             'Top Articles' => '/articles/top',
-            'Articles Récents' => '/articles/recent',
-            'Contact' => '/contact',
-            'À propos' => '/about'
+            'Articles Récents' => '/articles/recent'
         ];
 
         $data = array(

@@ -24,7 +24,7 @@ class ImageFormat {
     private function save() : void {
         $db = databaseTrait::getDb();
         $table = ImageFormat::$table;
-        $db->query("INSERT INTO $table (receivedformat, localformat) VALUES ('$this->receivedformat', '$this->localformat')");
+        $db->prepare("INSERT INTO $table (receivedformat, localformat) VALUES (:receivedformat, :localformat)")->execute(array('receivedformat' => $this->receivedformat, 'localformat' => $this->localformat));
         $this->id = $db->lastInsertId();
     }
 
@@ -41,7 +41,7 @@ class ImageFormat {
         $table = ImageFormat::$table;
         $result = $db->query("SELECT * FROM $table WHERE id = $id LIMIT 1");
         $imageformat = $result->fetch();
-        $imageformat = new ImageFormat($imageformat['format'], $imageformat['id']);
+        $imageformat = new ImageFormat($imageformat['receivedformat'], $imageformat['localformat'] ,$imageformat['id']);
         return $imageformat;
     }
 
@@ -74,7 +74,7 @@ class ImageFormat {
         $result = $db->query("SELECT * FROM $table");
         $imageformats = $result->fetchAll();
         $imageformats = array_map(function($imageformat) {
-            return new ImageFormat($imageformat['receivedformat'], $imageformat['id']);
+            return new ImageFormat($imageformat['receivedformat'], $imageformat['localformat'] ,$imageformat['id']);
         }, $imageformats);
         return $imageformats;
     }

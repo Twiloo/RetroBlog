@@ -9,6 +9,25 @@ use StandardBundle\models\ImageFormat as ImageFormat;
 
 class articleController {
 
+    public static function articleAction(int $id) : void {
+
+        $article = Article::getArticleById($id);
+
+        $data = array(
+            'title' => $article->getTitle(),
+            'article' => $article,
+            'linkedPages' => array(
+                'Articles' => '/articles',
+                'Top Articles' => '/articles/top',
+                'Articles Récents' => '/articles/recent',
+                'Contact' => '/contact',
+                'À propos' => '/about'
+            )
+        );
+
+        render('/article.view.php', $data);
+    }
+
     public static function articleListAction(string $order = '') : void {
         
         $titles = array('' => 'Articles', 'top' => 'Top Articles', 'recent' => 'Articles Récents');
@@ -21,9 +40,6 @@ class articleController {
         foreach ($titles as $path => $link) {
             $linkedPages[$link] = '/articles/' . $path;
         }
-        
-        $linkedPages['Contact'] = '/contact';
-        $linkedPages['À propos'] = '/about';
 
         $data = array(
             'order' => $order,
@@ -42,9 +58,7 @@ class articleController {
             'linkedPages' => array(
                 'Articles' => '/articles',
                 'Top Articles' => '/articles/top',
-                'Articles Récents' => '/articles/recent',
-                'Contact' => '/contact',
-                'À propos' => '/about'
+                'Articles Récents' => '/articles/recent'
             )
         );
 

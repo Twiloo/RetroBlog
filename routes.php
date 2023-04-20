@@ -84,4 +84,10 @@ post('/article/post', function () {
   \AppBundle\controllers\articleController::articlePostAction();
 });
 
+// Don't place this route before the /article/new route or it will be interpreted as an id
+
+get('/article/$id', function (int $id) {
+  \AppBundle\controllers\articleController::articleAction($id);
+});
+
 any('/404', 'views/404.php');
